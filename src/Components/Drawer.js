@@ -20,6 +20,8 @@ import CreateIcon from '@material-ui/icons/Create';
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import { withStyles } from '@material-ui/core/styles';
+import Cards from "./Cards"
+
 
 const drawerWidth = 240;
 
@@ -60,6 +62,10 @@ class ResponsiveDrawer extends React.Component {
         mobileOpen: false,
     };
 
+    constructor(props) {
+            super(props);
+            this.handleSubmit = this.handleLogout.bind(this);
+        }
     handleDrawerToggle = () => {
         this.setState(state => ({ mobileOpen: !state.mobileOpen }));
     };
@@ -99,7 +105,7 @@ class ResponsiveDrawer extends React.Component {
                 <Divider />
                 <List>
                     {['Inbox',  'Log-Out'].map((text, index) => (
-                        <ListItem button key={text}>
+                        <ListItem button key={text} onClick={this.handleLogout}>
                             <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                             <ListItemText primary={text} />
                         </ListItem>
@@ -123,13 +129,14 @@ class ResponsiveDrawer extends React.Component {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" color="inherit" noWrap>
-                            Responsive drawer
+                            Tasks
                         </Typography>
                     </Toolbar>
                 </AppBar>
                 <nav className={classes.drawer}>
                     {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
                     <Hidden smUp implementation="css">
+
                         <Drawer
                             container={this.props.container}
                             variant="temporary"
@@ -158,15 +165,23 @@ class ResponsiveDrawer extends React.Component {
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
                     <Typography paragraph>
-
+                    <Cards />
                     </Typography>
-                    <Typography paragraph>
 
-                    </Typography>
                 </main>
             </div>
         );
     }
+        handleLogout(e) {
+                    //localStorage.setItem('Called', "true");
+                   localStorage.setItem('IsLoggedIn', "false");
+                   window.location.reload(false); 
+
+
+
+            }
+
+
 }
 
 ResponsiveDrawer.propTypes = {
