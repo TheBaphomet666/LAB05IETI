@@ -13,6 +13,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 
+
 const styles = theme => ({
     main: {
         width: 'auto',
@@ -45,49 +46,82 @@ const styles = theme => ({
     },
 });
 
-function Login(props) {
-    const { classes } = props;
+class Login extends React.Component {
 
-    return (
-        <main className={classes.main}>
-            <CssBaseline />
-            <Paper className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon />
-                </Avatar>
-                <Typography component="h1" variant="h5">
-                    Log-in
-                </Typography>
-                <form className={classes.form}>
-                    <FormControl margin="normal" required fullWidth>
-                        <InputLabel htmlFor="email">Email Address</InputLabel>
-                        <Input id="email" name="email" autoComplete="email" autoFocus />
-                    </FormControl>
-                    <FormControl margin="normal" required fullWidth>
-                        <InputLabel htmlFor="password">Password</InputLabel>
-                        <Input name="password" type="password" id="password" autoComplete="current-password" />
-                    </FormControl>
-                    <FormControlLabel
-                        control={<Checkbox value="remember" color="primary" />}
-                        label="Remember me"
-                    />
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                    >
+    constructor(props) {
+            super(props);
+            this.state = {
+                navigate: false,
+                referrer: null
+            };
+            this.state={user:"",password:""};
+                    this.handleSubmit = this.handleSubmit.bind(this);
+                    this.handleUserTextChange=this.handleUserTextChange.bind(this);
+                    this.handlePasswordTextChange=this.handlePasswordTextChange.bind(this);
+        }
+    render(){
+        const {classes} = this.props;
+
+        return (
+            <main className={classes.main}>
+                <CssBaseline />
+                <Paper className={classes.paper}>
+                    <Avatar className={classes.avatar}>
+                        <LockOutlinedIcon />
+                    </Avatar>
+                    <Typography component="h1" variant="h5">
                         Log-in
-                    </Button>
-                </form>
-            </Paper>
-        </main>
-    );
-}
+                    </Typography>
+                    <form className={classes.form}>
+                        <FormControl margin="normal" required fullWidth>
+                            <InputLabel htmlFor="email">Email Address</InputLabel>
+                            <Input id="email" name="email" autoComplete="email" autoFocus onChange={this.handleUserTextChange} />
+                        </FormControl>
+                        <FormControl margin="normal" required fullWidth>
+                            <InputLabel htmlFor="password">Password</InputLabel>
+                            <Input name="password" type="password" id="password" autoComplete="current-password" onChange={this.handlePasswordTextChange} />
+                        </FormControl>
+                        <FormControlLabel
+                            control={<Checkbox value="remember" color="primary" />}
+                            label="Remember me"
+                        />
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                            onClick={this.handleSubmit}
+                        >
+                            Log-in
+                        </Button>
+                    </form>
+                </Paper>
+            </main>
+        );
+    }
+    handleSubmit(e) {
+                //localStorage.setItem('Called', "true");
+                if(localStorage.getItem('User')===this.state.user  && localStorage.getItem('Password')===this.state.password ){
+                    localStorage.setItem('IsLoggedIn', "true");
+                }
 
-Login.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
+        }
+        handleUserTextChange(e) {
+            console.log(e.target.value);
+
+            this.setState({
+                user: e.target.value
+
+            });
+        }
+
+        handlePasswordTextChange(e) {
+            console.log(e.target.value);
+            this.setState({
+                password: e.target.value
+            });
+        }
+}
 
 export default withStyles(styles)(Login);

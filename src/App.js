@@ -6,6 +6,14 @@ import Login from "./Components/Login"
 import Drawer from "./Components/Drawer"
 
 class App extends Component {
+constructor(props) {
+        super(props);
+        localStorage.setItem('User',"Baphomet");
+        localStorage.setItem('Password',"666");
+
+
+
+    }
   render() {
     return (
         <Router>
@@ -13,8 +21,10 @@ class App extends Component {
                 <div className="App">
                     <header className="App-header">
 
-                        <Route exact path="/" component={Login}/>
-                        <Route exact path="/" component={Drawer}/>
+                        {localStorage.getItem('IsLoggedIn')==="true"
+                                         ? <li> <Route exact path="/" component={Drawer}/></li>
+                                         : <li><Route exact path="/" component={Login}/></li>
+                        }
                     </header>
                 </div>
 
