@@ -7,16 +7,13 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+
 const styles = {
     card: {
-        display: 'block',
-        width: 'fixed',
-        marginLeft: 25,
-        marginRight: 25,
-
+        minWidth: 275,
     },
     bullet: {
-
+        display: 'inline-block',
         margin: '0 2px',
         transform: 'scale(0.8)',
     },
@@ -30,14 +27,31 @@ const styles = {
 
 function SimpleCard(props) {
     const { classes } = props;
+    const bull = <span className={classes.bullet}>•</span>;
 
     return (
         <Card className={classes.card}>
             <CardContent>
-                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                    Word of the Day
+                <Typography variant="h5" component="h2">
+                    Status: {props.status}
+                </Typography>
+                <Typography className={classes.title} color="textPrimary" gutterBottom>
+                    Description: {props.description}
+                    <br/>
+
                 </Typography>
 
+                <Typography className={classes.pos} color="textPrimary">
+                    Resposible:
+                    <br/>
+                    Name: {props.name}
+                    <br/>
+                    Email: {props.email}
+
+                </Typography>
+                <Typography component="p">
+                    DueDate: {props.duedate}
+                </Typography>
             </CardContent>
             <CardActions>
                 <Button size="small">Learn More</Button>

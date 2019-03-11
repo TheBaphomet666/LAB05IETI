@@ -20,7 +20,7 @@ import CreateIcon from '@material-ui/icons/Create';
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import { withStyles } from '@material-ui/core/styles';
-import Cards from "./Cards"
+import Card from "./Card"
 
 
 const drawerWidth = 240;
@@ -165,7 +165,9 @@ class ResponsiveDrawer extends React.Component {
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
                     <Typography paragraph>
-                    <Cards />
+
+                    <Card status="finished" description="Dummy" name="Jensen" email="mail@mail.com" duedate="24" />
+
                     </Typography>
 
                 </main>
