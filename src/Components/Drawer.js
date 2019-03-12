@@ -21,6 +21,7 @@ import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import { withStyles } from '@material-ui/core/styles';
 import Card from "./Card"
+import Cardlist from "./CardList"
 
 
 const drawerWidth = 240;
@@ -65,7 +66,16 @@ class ResponsiveDrawer extends React.Component {
     constructor(props) {
             super(props);
             this.handleSubmit = this.handleLogout.bind(this);
+        this.state = {
+            cardList: [],
+        };
+        this.getTaks = this.getTaks.bind(this);
+
     }
+    componentDidMount() {
+        this.getTaks();
+    }
+
     getTaks(query) {
         /*fetch('https://www.googleapis.com/books/v1/volumes?q=' + query)
             .then(response => response.json())
@@ -93,6 +103,29 @@ class ResponsiveDrawer extends React.Component {
             dueDate: 156464645646
 
             })
+        cardList.push({
+
+            description: "text ",
+            responsible: {
+                name: "Carrillo",
+                email: "sancarbar@gmail"
+            },
+            status: "ready",
+            dueDate: 156464645646
+
+        })
+        cardList.push({
+
+            description: "description ",
+            responsible: {
+                name: "Santiago",
+                email: "sancarbar@gmail"
+            },
+            status: "ready",
+            dueDate: 156464645646
+
+        })
+        this.setState({cardList: cardList});
 
     }
     handleDrawerToggle = () => {
@@ -195,7 +228,8 @@ class ResponsiveDrawer extends React.Component {
                     <div className={classes.toolbar} />
                     <Typography paragraph>
 
-                    <Card status="finished" description="Dummy" name="Jensen" email="mail@mail.com" duedate="24" />
+
+                    <Cardlist cardsList={this.state.cardList} />
 
                     </Typography>
 
