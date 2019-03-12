@@ -65,7 +65,36 @@ class ResponsiveDrawer extends React.Component {
     constructor(props) {
             super(props);
             this.handleSubmit = this.handleLogout.bind(this);
-        }
+    }
+    getTaks(query) {
+        /*fetch('https://www.googleapis.com/books/v1/volumes?q=' + query)
+            .then(response => response.json())
+            .then(data => {
+                let booksList = [];
+                data.items.forEach(function (book) {
+                    booksList.push({
+                        title: book.volumeInfo.title,
+                        image: book.volumeInfo.imageLinks ? book.volumeInfo.imageLinks.thumbnail : "",
+                        language: book.volumeInfo.language
+                    })
+
+                });
+                this.setState({booksList: booksList});
+            });*/
+        let cardList = []
+            cardList.push({
+
+            description: "some description text ",
+            responsible: {
+                name: "Santiago Carrillo",
+                email: "sancarbar@gmail"
+             },
+            status: "ready",
+            dueDate: 156464645646
+
+            })
+
+    }
     handleDrawerToggle = () => {
         this.setState(state => ({ mobileOpen: !state.mobileOpen }));
     };
