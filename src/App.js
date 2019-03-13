@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {BrowserRouter as Router, Route} from "react-router-dom";
+import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 import Login from "./Components/Login"
 import Drawer from "./Components/Drawer"
+import NewTask from "./Components/NewTask"
 
 class App extends Component {
 constructor(props) {
@@ -15,24 +16,36 @@ constructor(props) {
 
     }
 
-  render() {
-    return (
-        <Router>
-            <div>
-                <div className="App">
-                    <header className="App-header">
 
-                        {localStorage.getItem('IsLoggedIn')==="true"
-                                         ? <li> <Route exact path="/" component={Drawer}/></li>
-                                         : <li><Route exact path="/" component={Login}/></li>
-                        }
-                    </header>
-                </div>
+   render() {
+      let routeOptions;
+      if (localStorage.getItem('IsLoggedIn')==="true") {
 
-            </div>
-        </Router>
-    );
-  }
+        routeOptions = (
+          <Switch>
+            <Route exact path="/Tasks" component={Drawer}/>
+            <Route exact path="/NewTask" component={NewTask}/>
+            <Redirect to="/Tasks" />
+          </Switch>
+
+
+        );
+      }else {
+        routeOptions = (
+          <Switch>
+            <Route exact path="/Login" component={Login}/>
+            <Redirect to="/Login" />
+          </Switch>
+        );
+      }
+      return (
+        <div>
+          <Router>{routeOptions}</Router>
+        </div>
+      );
+    }
 }
+
+
 
 export default App;

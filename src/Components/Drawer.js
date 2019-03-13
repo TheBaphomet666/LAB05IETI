@@ -126,6 +126,7 @@ class ResponsiveDrawer extends React.Component {
 
         })
         this.setState({cardList: cardList});
+        localStorage.setItem('Tasks', cardList);
 
     }
     handleDrawerToggle = () => {
@@ -225,13 +226,9 @@ class ResponsiveDrawer extends React.Component {
                     </Hidden>
                 </nav>
                 <main className={classes.content}>
+
                     <div className={classes.toolbar} />
-                    <Typography paragraph>
-
-
                     <Cardlist cardsList={this.state.cardList} />
-
-                    </Typography>
 
                 </main>
             </div>
