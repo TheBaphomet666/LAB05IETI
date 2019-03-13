@@ -131,7 +131,7 @@ class NewTask extends React.Component {
         );
     }
     handleSubmit(e) {
-                //localStorage.setItem('Called', "true");
+                localStorage.setItem('Called', "true");
 
 
         }

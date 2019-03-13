@@ -167,7 +167,7 @@ class ResponsiveDrawer extends React.Component {
                 </List>
                 <Divider />
                 <List>
-                    {['Inbox',  'Log-Out'].map((text, index) => (
+                    {['New Task',  'Log-Out'].map((text, index) => (
                         <ListItem button key={text} onClick={this.handleLogout}>
                             <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                             <ListItemText primary={text} />
