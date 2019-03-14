@@ -45,6 +45,8 @@ const styles = theme => ({
     },
 });
 
+
+
 class NewTask extends React.Component {
 
     constructor(props) {
@@ -131,10 +133,46 @@ class NewTask extends React.Component {
         );
     }
     handleSubmit(e) {
-                localStorage.setItem('Called', "true");
+                if(localStorage.getItem("Tasks") === null){
+                    let cardList = [];
+                    cardList.push({
+
+                        description: this.state.description,
+                        responsible: {
+                            name: this.state.name,
+                            email: this.state.email
+                        },
+                        status: this.state.state,
+                        dueDate: this.state.dueDate
+
+                    });
+                    localStorage.setItem("Tasks", JSON.stringify(cardList));
+                }
+                else{
+
+                    let cardList = JSON.parse(localStorage.getItem("Tasks"));
+                    cardList.push({
+
+                        description: this.state.description,
+                        responsible: {
+                            name: this.state.name,
+                            email: this.state.email
+                        },
+                        status: this.state.state,
+                        dueDate: this.state.dueDate
+
+                    });
+                    localStorage.setItem("Tasks", JSON.stringify(cardList));
+                }
+
+                        console.log(localStorage.getItem("Tasks"));
+
+
+                this.setState({status:"",description:"",dueDate:"",resposible:""});
 
 
         }
+
         handleDescriptionTextChange(e) {
             console.log(e.target.value);
 
@@ -170,5 +208,7 @@ class NewTask extends React.Component {
 
 
 }
+
+
 
 export default withStyles(styles)(NewTask);

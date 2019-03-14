@@ -65,7 +65,8 @@ class ResponsiveDrawer extends React.Component {
 
     constructor(props) {
             super(props);
-            this.handleSubmit = this.handleLogout.bind(this);
+            this.handleLogout = this.handleLogout.bind(this);
+            this.handleNewTask = this.handleNewTask.bind(this);
         this.state = {
             cardList: [],
         };
@@ -91,42 +92,14 @@ class ResponsiveDrawer extends React.Component {
                 });
                 this.setState({booksList: booksList});
             });*/
-        let cardList = []
-            cardList.push({
+           // console.log(localStorage.getItem("Tasks") === null);
+        if(!(localStorage.getItem("Tasks") === null)){
+            let cardList = JSON.parse(localStorage.getItem("Tasks"));
+            this.setState({cardList: cardList});
+            //console.log(this.state.cardList);
+        }
 
-            description: "some description text ",
-            responsible: {
-                name: "Santiago Carrillo",
-                email: "sancarbar@gmail"
-             },
-            status: "ready",
-            dueDate: 156464645646
 
-            })
-        cardList.push({
-
-            description: "text ",
-            responsible: {
-                name: "Carrillo",
-                email: "sancarbar@gmail"
-            },
-            status: "ready",
-            dueDate: 156464645646
-
-        })
-        cardList.push({
-
-            description: "description ",
-            responsible: {
-                name: "Santiago",
-                email: "sancarbar@gmail"
-            },
-            status: "ready",
-            dueDate: 156464645646
-
-        })
-        this.setState({cardList: cardList});
-        localStorage.setItem('Tasks', cardList);
 
     }
     handleDrawerToggle = () => {
@@ -167,12 +140,15 @@ class ResponsiveDrawer extends React.Component {
                 </List>
                 <Divider />
                 <List>
-                    {['New Task',  'Log-Out'].map((text, index) => (
-                        <ListItem button key={text} onClick={this.handleLogout}>
-                            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
+                    <ListItem button key={"New Task"} onClick={this.handleNewTask}>
+                        <ListItemIcon> <MailIcon /></ListItemIcon>
+                        <ListItemText primary={"New Task"} />
+                    </ListItem>
+                    <ListItem button key={"Log-Out"} onClick={this.handleLogout}>
+                        <ListItemIcon><InboxIcon /> </ListItemIcon>
+                        <ListItemText primary={"Log-Out"} />
+                    </ListItem>
+
                 </List>
 
             </div>
@@ -230,6 +206,7 @@ class ResponsiveDrawer extends React.Component {
                     <div className={classes.toolbar} />
                     <Cardlist cardsList={this.state.cardList} />
 
+
                 </main>
             </div>
         );
@@ -242,6 +219,14 @@ class ResponsiveDrawer extends React.Component {
 
 
             }
+         handleNewTask(e) {
+                 //localStorage.setItem('Called', "true");
+
+                window.location.replace("/NewTask");
+
+
+
+         }
 
 
 }
@@ -252,6 +237,18 @@ ResponsiveDrawer.propTypes = {
     // You won't need it on your project.
     container: PropTypes.object,
     theme: PropTypes.object.isRequired,
+};
+
+Array.prototype.unique = function() {
+    var a = this.concat();
+    for(var i=0; i<a.length; ++i) {
+        for(var j=i+1; j<a.length; ++j) {
+            if(a[i] === a[j])
+                a.splice(j--, 1);
+        }
+    }
+
+    return a;
 };
 
 export default withStyles(styles, { withTheme: true })(ResponsiveDrawer);
