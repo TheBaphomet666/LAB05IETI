@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom
 import Login from "./Components/Login"
 import Drawer from "./Components/Drawer"
 import NewTask from "./Components/NewTask"
+import Register from "./Components/Register"
 
 class App extends Component {
 constructor(props) {
@@ -25,6 +26,7 @@ constructor(props) {
           <Switch>
             <Route exact path="/Tasks" component={Drawer}/>
             <Route exact path="/NewTask" component={NewTask}/>
+
             <Redirect to="/Tasks" />
           </Switch>
 
@@ -34,6 +36,7 @@ constructor(props) {
         routeOptions = (
           <Switch>
             <Route exact path="/Login" component={Login}/>
+            <Route exact path="/Register" component={Register}/>
             <Redirect to="/Login" />
           </Switch>
         );
