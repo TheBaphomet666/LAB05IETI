@@ -13,7 +13,7 @@ export default class CardsList extends Component {
         const cards = this.props.cardsList.map((card, i) => {
             return (
 
-                <Card key={i} status={card.status} description={card.description} name={card.responsible.name} email={card.responsible.email} duedate={card.dueDate} />
+                <Card key={i} status={card.status} description={card.description} name={card.responsible.name} email={card.responsible.email} dueDate={card.dueDate} />
 
             );
         });

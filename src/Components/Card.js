@@ -42,7 +42,7 @@ function SimpleCard(props) {
                 </Typography>
 
                 <Typography className={classes.pos} color="textPrimary">
-                    Resposible:
+                    responsible:
                     <br/>
                     Name: {props.name}
                     <br/>
@@ -50,7 +50,7 @@ function SimpleCard(props) {
 
                 </Typography>
                 <Typography component="p">
-                    DueDate: {props.duedate}
+                    DueDate: {props.dueDate}
                 </Typography>
             </CardContent>
             <CardActions>

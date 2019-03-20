@@ -55,10 +55,11 @@ class NewTask extends React.Component {
                 navigate: false,
                 referrer: null
             };
-            this.state={status:"",description:"",dueDate:"",resposible:""};
+            this.state={status:"",description:"",dueDate:"",responsible:{ name:"", email:""}};
                     this.handleSubmit = this.handleSubmit.bind(this);
                     this.handleDescriptionTextChange=this.handleDescriptionTextChange.bind(this);
-                    this.handleResposibleTextChange=this.handleResposibleTextChange.bind(this);
+                    this.handleresponsibleNameTextChange=this.handleresponsibleNameTextChange.bind(this);
+                    this.handleresponsibleEmailTextChange=this.handleresponsibleEmailTextChange.bind(this);
                     this.handleDueDateChange=this.handleDueDateChange.bind(this);
                     this.handleStatusChange=this.handleStatusChange.bind(this);
 
@@ -80,8 +81,12 @@ class NewTask extends React.Component {
                             <Input id="Description" name="Description" autoComplete="Description" autoFocus onChange={this.handleDescriptionTextChange} />
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
-                            <InputLabel htmlFor="Resposible">Resposible</InputLabel>
-                            <Input id="Resposible" name="Resposible" autoComplete="Resposible" autoFocus onChange={this.handleResposibleTextChange} />
+                            <InputLabel htmlFor="name">Name</InputLabel>
+                            <Input id="name" name="name" autoComplete="Name" autoFocus onChange={this.handleresponsibleNameTextChange} />
+                        </FormControl>
+                        <FormControl margin="normal" required fullWidth>
+                            <InputLabel htmlFor="email">Email</InputLabel>
+                            <Input id="email" name="email" autoComplete="email" autoFocus onChange={this.handleresponsibleEmailTextChange} />
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
 
@@ -139,8 +144,8 @@ class NewTask extends React.Component {
 
                         description: this.state.description,
                         responsible: {
-                            name: this.state.name,
-                            email: this.state.email
+                            name: this.state.responsible.name,
+                            email: this.state.responsible.email
                         },
                         status: this.state.state,
                         dueDate: this.state.dueDate
@@ -155,8 +160,8 @@ class NewTask extends React.Component {
 
                         description: this.state.description,
                         responsible: {
-                            name: this.state.name,
-                            email: this.state.email
+                            name: this.state.responsible.name,
+                            email: this.state.responsible.email
                         },
                         status: this.state.state,
                         dueDate: this.state.dueDate
@@ -168,7 +173,7 @@ class NewTask extends React.Component {
                         console.log(localStorage.getItem("Tasks"));
 
 
-                this.setState({status:"",description:"",dueDate:"",resposible:""});
+                this.setState({status:"",description:"",dueDate:"",responsible: {name:"", email:""}});
 
 
         }
@@ -189,14 +194,25 @@ class NewTask extends React.Component {
 
                     });
                 }
-        handleResposibleTextChange(e) {
+        handleresponsibleNameTextChange(e) {
                     console.log(e.target.value);
 
                     this.setState({
-                        resposible: e.target.value
+                        responsible: {name: e.target.value,
+                                      email : this.state.responsible.email
+                                    }
 
                     });
                 }
+        handleresponsibleEmailTextChange(e) {
+                            console.log(e.target.value);
+
+                            this.setState({
+                                responsible: {name: e.target.value,
+                                                email: e.target.value}
+
+                            });
+                        }
         handleStatusChange(e) {
                     console.log(e.target.value);
 
